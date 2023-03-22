@@ -1,0 +1,48 @@
+{
+	"extends": ["react-app", "react-app/jest", "eslint:recommended", "plugin:prettier/recommended"],
+	"rules": {
+		"no-undef": "off",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"@typescript-eslint/explicit-module-boundary-types": "error",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"@typescript-eslint/naming-convention": [
+			"error",
+			{
+				"selector": "interface",
+				"format": ["PascalCase"],
+				"custom": {
+					"regex": "^I[A-Z]",
+					"match": true
+				}
+			},
+			{
+				"selector": "typeAlias",
+				"format": ["PascalCase"],
+				"custom": {
+					"regex": "^T[A-Z]",
+					"match": true
+				}
+			}
+		],
+		"prefer-const": "error",
+		"no-console": "warn",
+		"comma-dangle": ["error", "always-multiline"],
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index",
+					"object",
+					"type"
+				],
+				"newlines-between": "always"
+			}
+		]
+	}
+}
