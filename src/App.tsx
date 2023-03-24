@@ -1,5 +1,9 @@
+import { RouterProvider } from 'react-router-dom'
+
+import rootRouter from 'routes/rootRoute'
+
 function App(): JSX.Element {
-	return <div>App</div>
+	return <RouterProvider router={rootRouter} />
 }
 
 export default App

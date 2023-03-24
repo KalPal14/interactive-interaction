@@ -27,22 +27,6 @@
 		],
 		"prefer-const": "error",
 		"no-console": "warn",
-		"comma-dangle": ["error", "always-multiline"],
-		"import/order": [
-			"error",
-			{
-				"groups": [
-					"builtin",
-					"external",
-					"internal",
-					"parent",
-					"sibling",
-					"index",
-					"object",
-					"type"
-				],
-				"newlines-between": "always"
-			}
-		]
+		"comma-dangle": ["error", "always-multiline"]
 	}
 }
