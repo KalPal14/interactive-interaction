@@ -12,6 +12,7 @@
 		"@types/react": "^18.0.0",
 		"@types/react-redux": "^7.1.25",
 		"@types/react-router-dom": "^5.3.3",
+		"@types/semantic-ui": "^2.2.7",
 		"@typescript-eslint/parser": "^5.56.0",
 		"classnames": "^2.3.2",
 		"firebase": "^9.18.0",

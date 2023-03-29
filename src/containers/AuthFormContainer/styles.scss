@@ -1,0 +1,14 @@
+.auth {
+	&__page {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		padding: 10px;
+	}
+
+	&__form-container {
+		width: 100%;
+		max-width: 400px;
+	}
+}
