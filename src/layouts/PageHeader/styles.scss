@@ -1,0 +1,11 @@
+@import '../../main.scss';
+
+.page-header {
+	background-color: #a291fb;
+	padding: 12px 0;
+
+	&__content {
+		display: flex;
+		justify-content: flex-end;
+	}
+}

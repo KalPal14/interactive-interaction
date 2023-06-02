@@ -1,5 +1,12 @@
+import PageHeader from 'layouts/PageHeader'
+import './styles.scss'
+
 function HomePage(): JSX.Element {
-	return <div>HomePage</div>
+	return (
+		<div className='home'>
+			<PageHeader />
+		</div>
+	)
 }
 
 export default HomePage
