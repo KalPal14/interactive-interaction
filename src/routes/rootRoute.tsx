@@ -4,6 +4,8 @@ import HomePage from 'pages/HomePage'
 import SignInPage from 'pages/SignInPage'
 import SignUpPage from 'pages/SignUpPage'
 import NotFoundPage from 'pages/NotFoundPage'
+import CreateAccountPage from 'pages/CreateAccountPage'
+import ProtectedPage from 'containers/ProtectedPage'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -12,15 +14,35 @@ const rootRouter = createBrowserRouter([
 	},
 	{
 		path: '/',
-		element: <HomePage />,
+		element: (
+			<ProtectedPage accessFor='userWithAccount'>
+				<HomePage />
+			</ProtectedPage>
+		),
 	},
 	{
 		path: '/sign-in',
-		element: <SignInPage />,
+		element: (
+			<ProtectedPage accessFor='guest'>
+				<SignInPage />
+			</ProtectedPage>
+		),
 	},
 	{
 		path: '/sign-up',
-		element: <SignUpPage />,
+		element: (
+			<ProtectedPage accessFor='guest'>
+				<SignUpPage />
+			</ProtectedPage>
+		),
+	},
+	{
+		path: 'create-account',
+		element: (
+			<ProtectedPage accessFor='userWithoutAccount'>
+				<CreateAccountPage />
+			</ProtectedPage>
+		),
 	},
 ])
 

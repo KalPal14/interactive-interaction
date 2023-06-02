@@ -1,5 +1,5 @@
 import { Form, Ref } from 'semantic-ui-react'
-import { useController, UseControllerProps } from 'react-hook-form'
+import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
 
 import { TTextFieldType } from 'ts/types/inputFields'
 
@@ -9,7 +9,7 @@ interface IProps {
 	type: TTextFieldType
 }
 
-function TextField(props: UseControllerProps & IProps): JSX.Element {
+function TextField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
 	const {
 		field,
 		fieldState: { error },

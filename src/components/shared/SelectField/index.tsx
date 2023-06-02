@@ -1,5 +1,5 @@
 import { Form, Ref } from 'semantic-ui-react'
-import { useController, UseControllerProps } from 'react-hook-form'
+import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
 
 import { TSelectOptionsList } from 'ts/types/inputFields'
 
@@ -7,9 +7,10 @@ interface IProps {
 	label?: string
 	placeholder?: string
 	options: TSelectOptionsList
+	disabled?: boolean
 }
 
-function SelectField(props: UseControllerProps & IProps): JSX.Element {
+function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
 	const {
 		field,
 		fieldState: { error },
@@ -20,8 +21,9 @@ function SelectField(props: UseControllerProps & IProps): JSX.Element {
 			<Form.Dropdown
 				search
 				selection
+				disabled={props.disabled}
 				options={props.options}
-				onChange={(_, { value }) => {
+				onChange={(_, { value }): void => {
 					field.onChange(value)
 				}}
 				onBlur={field.onBlur}

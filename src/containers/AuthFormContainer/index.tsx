@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
 
 import { TLink } from 'ts/types/forJsx'
-import { defaultLinkValues } from 'helpers/defaultValues'
+import { defLinkValues } from 'helpers/defaultValues'
 
 import './styles.scss'
 
@@ -17,7 +17,7 @@ function AuthFormContainer({
 	children,
 	title,
 	subtitle = '',
-	link = defaultLinkValues,
+	link = defLinkValues,
 }: IProps): JSX.Element {
 	return (
 		<div className='auth__page'>
