@@ -1,14 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { getDatabase, ref, onValue, set } from 'firebase/database'
 
-import { TStudent, TStudents, TStudentsList } from 'ts/types/student'
+import { TStudent, TStudents } from 'ts/types/student'
 
 interface IProviderProps {
 	children: JSX.Element
 }
 interface IContext {
 	data: {
-		studentsList: TStudentsList
 		students: TStudents
 	}
 	actions: {
@@ -33,8 +32,6 @@ export function useStudent(): IContext {
 export function StudentProvider({ children }: IProviderProps): JSX.Element {
 	const [students, setStudents] = useState<TStudents>({})
 
-	const studentsList: TStudentsList = Object.values(students)
-
 	useEffect((): void => {
 		onValue(studentsRef, (snapshot) => {
 			if (snapshot.exists()) {
@@ -52,10 +49,10 @@ export function StudentProvider({ children }: IProviderProps): JSX.Element {
 		}
 
 		return {
-			data: { students, studentsList },
+			data: { students },
 			actions: { setNewStudent },
 			selectors: {},
 		}
-	}, [students, studentsList])
+	}, [students])
 	return <Student.Provider value={value}>{children}</Student.Provider>
 }

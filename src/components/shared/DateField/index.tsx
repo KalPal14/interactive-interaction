@@ -1,18 +1,17 @@
 import { Form, Ref } from 'semantic-ui-react'
 import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
-
-import { TSelectOptionsList } from 'ts/types/inputFields'
+import { TDateFieldType } from 'ts/types/inputFields'
 
 interface IProps {
 	label?: string
 	placeholder?: string
-	options: TSelectOptionsList
+	type: TDateFieldType
+	min?: string
+	max?: string
 	disabled?: boolean
-	multiple?: boolean
-	clearable?: boolean
 }
 
-function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
+function DateField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
 	const {
 		field,
 		fieldState: { error },
@@ -20,19 +19,15 @@ function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProp
 
 	return (
 		<Ref innerRef={field.ref}>
-			<Form.Dropdown
-				search
-				selection
-				clearable={props.clearable ?? false}
-				disabled={props.disabled ?? false}
-				multiple={props.multiple ?? false}
-				options={props.options}
-				onChange={(_, { value }): void => {
-					field.onChange(value)
-				}}
+			<Form.Input
+				type={props.type}
+				onChange={field.onChange}
 				onBlur={field.onBlur}
 				value={field.value}
 				name={field.name}
+				min={props.min}
+				max={props.max}
+				disabled={props.disabled}
 				label={props.label ?? ''}
 				placeholder={props.placeholder ?? ''}
 				error={(error?.message || error?.type) ?? false}
@@ -41,4 +36,4 @@ function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProp
 	)
 }
 
-export default SelectField
+export default DateField

@@ -5,6 +5,8 @@ export type TGroup = {
 	department_id: TId
 	name: string
 	students: TId[]
+	lectures?: TId[]
+	predmets?: TId[]
 }
 
 export type TGroups = {
@@ -20,5 +22,5 @@ export type TGroupsFilters = {
 export type TUpdateGroupListPayload = {
 	value: TId[]
 	groupId: TId
-	listName: 'students'
+	listName: 'students' | 'lectures' | 'predmets'
 }

@@ -25,7 +25,7 @@ function TextField<T extends FieldValues>(props: UseControllerProps<T> & IProps)
 				name={field.name}
 				label={props.label ?? ''}
 				placeholder={props.placeholder ?? ''}
-				error={error?.message ?? false}
+				error={(error?.message || error?.type) ?? false}
 			/>
 		</Ref>
 	)

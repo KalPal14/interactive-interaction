@@ -3,7 +3,6 @@ import { getDatabase, ref, onValue, set } from 'firebase/database'
 
 import { TGroups, TGroupsFilters, TGroupsList, TUpdateGroupListPayload } from 'ts/types/group'
 import { TSelectOptionsList } from 'ts/types/inputFields'
-import { defGroupsFilters } from 'helpers/defaultValues'
 
 interface IProviderProps {
 	children: JSX.Element
@@ -19,6 +18,7 @@ interface IContext {
 	selectors: {
 		selectGroupsListBy: (filters: TGroupsFilters) => TGroupsList
 		selectGroupsOptionsBy: (filters: TGroupsFilters) => TSelectOptionsList
+		selectAllGroupsOptions: () => TSelectOptionsList
 	}
 }
 
@@ -52,32 +52,38 @@ export function GroupProvider({ children }: IProviderProps): JSX.Element {
 	const value: IContext = useMemo(() => {
 		//actions
 		function updateGroupListField({ value, groupId, listName }: TUpdateGroupListPayload): void {
-			const prevList = groups[groupId][listName]
-			const newList = [...prevList, ...value]
+			const prevList = groups[groupId][listName] ?? []
+			const onlyNewItems = value.filter((item) => !prevList.includes(item))
+			if (!onlyNewItems.length) return
+			const newList = [...prevList, ...onlyNewItems]
 			set(ref(db, `groups/${groupId}/${listName}`), newList)
 		}
 		//selectors
-		function selectGroupsListBy({
-			departments = [],
-		}: TGroupsFilters = defGroupsFilters): TGroupsList {
+		function selectGroupsListBy({ departments = [] }: TGroupsFilters): TGroupsList {
 			return groupsList.filter((group) => departments.includes(group.department_id))
 		}
 
-		function selectGroupsOptionsBy({
-			departments = [],
-		}: TGroupsFilters = defGroupsFilters): TSelectOptionsList {
+		function selectGroupsOptionsBy({ departments = [] }: TGroupsFilters): TSelectOptionsList {
 			const sortedGroupsList = selectGroupsListBy({ departments })
-			return sortedGroupsList.map((group) => ({
-				key: group.id,
-				value: group.id,
-				text: group.name,
+			return sortedGroupsList.map(({ id, name }) => ({
+				key: id,
+				value: id,
+				text: name,
+			}))
+		}
+
+		function selectAllGroupsOptions(): TSelectOptionsList {
+			return groupsList.map(({ id, name }) => ({
+				key: id,
+				value: id,
+				text: name,
 			}))
 		}
 
 		return {
 			data: { groups, groupsList },
 			actions: { updateGroupListField },
-			selectors: { selectGroupsListBy, selectGroupsOptionsBy },
+			selectors: { selectGroupsListBy, selectGroupsOptionsBy, selectAllGroupsOptions },
 		}
 	}, [groups, groupsList])
 	return <Group.Provider value={value}>{children}</Group.Provider>

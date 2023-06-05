@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import TextField from 'components/shared/TextField'
 import SelectField from 'components/shared/SelectField'
 
-import { useAuth } from 'context/Auth'
+import { useUser } from 'context/User'
 import { useFaculty } from 'context/Faculty'
 import { useDepartment } from 'context/Department'
 import { useGroup } from 'context/Group'
@@ -30,8 +30,8 @@ function CreateAccountForm(): JSX.Element {
 	})
 
 	const {
-		data: { activeSession },
-	} = useAuth()
+		data: { currentUser },
+	} = useUser()
 	const {
 		data: { facultiesOptions },
 	} = useFaculty()
@@ -75,15 +75,16 @@ function CreateAccountForm(): JSX.Element {
 	}
 
 	function createNewStudent(formData: TCreateAccountFD): void {
-		if (!activeSession.user) return
+		if (!currentUser) return
 		setNewStudent({
-			...activeSession.user,
+			...currentUser,
 			first_name: formData.firstName,
 			last_name: formData.lastName,
 			group_id: formData.group,
+			role: 'student',
 		})
 		updateGroupListField({
-			value: [activeSession.user.id],
+			value: [currentUser.id],
 			groupId: formData.group,
 			listName: 'students',
 		})
@@ -91,15 +92,16 @@ function CreateAccountForm(): JSX.Element {
 	}
 
 	function createNewTeacher(formData: TCreateAccountFD): void {
-		if (!activeSession.user) return
+		if (!currentUser) return
 		setNewTeacher({
-			...activeSession.user,
+			...currentUser,
 			first_name: formData.firstName,
 			last_name: formData.lastName,
 			department_id: formData.department,
+			role: 'teacher',
 		})
 		updateDepartmentListField({
-			value: [activeSession.user.id],
+			value: [currentUser.id],
 			departmentId: formData.department,
 			listName: 'teachers',
 		})

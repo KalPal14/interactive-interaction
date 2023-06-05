@@ -9,32 +9,38 @@ import './main.scss'
 
 import App from 'App'
 
-import { AuthProvider } from 'context/Auth'
+import { UserProvider } from 'context/User'
 import { DisclosureProvider } from 'context/Disclosure'
 import { FacultyProvider } from 'context/Faculty'
 import { DepartmentProvider } from 'context/Department'
 import { GroupProvider } from 'context/Group'
 import { TeacherProvider } from 'context/Teacher'
 import { StudentProvider } from 'context/Student'
+import { PredmetProvider } from 'context/Predmet'
+import { LectureProvider } from 'context/Lecture'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<AuthProvider>
-			<DisclosureProvider>
-				<FacultyProvider>
-					<DepartmentProvider>
-						<GroupProvider>
-							<TeacherProvider>
-								<StudentProvider>
-									<App />
-								</StudentProvider>
-							</TeacherProvider>
-						</GroupProvider>
-					</DepartmentProvider>
-				</FacultyProvider>
-			</DisclosureProvider>
-		</AuthProvider>
+		<DisclosureProvider>
+			<FacultyProvider>
+				<DepartmentProvider>
+					<GroupProvider>
+						<TeacherProvider>
+							<StudentProvider>
+								<UserProvider>
+									<PredmetProvider>
+										<LectureProvider>
+											<App />
+										</LectureProvider>
+									</PredmetProvider>
+								</UserProvider>
+							</StudentProvider>
+						</TeacherProvider>
+					</GroupProvider>
+				</DepartmentProvider>
+			</FacultyProvider>
+		</DisclosureProvider>
 	</React.StrictMode>,
 )

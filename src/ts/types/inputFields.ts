@@ -7,3 +7,8 @@ export type TSelectOption = {
 	text: string
 }
 export type TSelectOptionsList = TSelectOption[]
+
+export type TDateFieldType = 'datetime-local' | 'date' | 'time'
+export type TDateFieldValue =
+	| `${string}-${string}-${string}`
+	| `${string}-${string}-${string}T${string}:${string}`

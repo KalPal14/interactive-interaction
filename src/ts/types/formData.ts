@@ -10,6 +10,15 @@ export type TCreateAccountFD = {
 	lastName: string
 	faculty: TId
 	department: TId
-	role: TId
+	role: 'student' | 'teacher'
 	group: TId
+}
+
+export type TCreateLectureFD = {
+	name: string
+	predmet: TId
+	newPredmet: string
+	startDate: string
+	endDate: string
+	groups: TId[]
 }

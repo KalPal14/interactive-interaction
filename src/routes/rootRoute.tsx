@@ -6,6 +6,7 @@ import SignUpPage from 'pages/SignUpPage'
 import NotFoundPage from 'pages/NotFoundPage'
 import CreateAccountPage from 'pages/CreateAccountPage'
 import ProtectedPage from 'containers/ProtectedPage'
+import CreateLecturePage from 'pages/CreateLecturePage'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -41,6 +42,14 @@ const rootRouter = createBrowserRouter([
 		element: (
 			<ProtectedPage accessFor='userWithoutAccount'>
 				<CreateAccountPage />
+			</ProtectedPage>
+		),
+	},
+	{
+		path: 'create-lecture',
+		element: (
+			<ProtectedPage accessFor='teacher'>
+				<CreateLecturePage />
 			</ProtectedPage>
 		),
 	},

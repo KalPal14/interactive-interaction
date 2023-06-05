@@ -1,18 +1,18 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { getDatabase, ref, onValue, set } from 'firebase/database'
 
-import { TTeacher, TTeachers, TTeachersList } from 'ts/types/teacher'
+import { TTeacher, TTeachers, TUpdateTeacherListPayload } from 'ts/types/teacher'
 
 interface IProviderProps {
 	children: JSX.Element
 }
 interface IContext {
 	data: {
-		teachersList: TTeachersList
 		teachers: TTeachers
 	}
 	actions: {
 		setNewTeacher: (teacher: TTeacher) => void
+		updateTeacherListField: (payload: TUpdateTeacherListPayload) => void
 	}
 	selectors: {}
 }
@@ -33,8 +33,6 @@ export function useTeacher(): IContext {
 export function TeacherProvider({ children }: IProviderProps): JSX.Element {
 	const [teachers, setTeachers] = useState<TTeachers>({})
 
-	const teachersList: TTeachersList = Object.values(teachers)
-
 	useEffect((): void => {
 		onValue(teachersRef, (snapshot) => {
 			if (snapshot.exists()) {
@@ -51,11 +49,20 @@ export function TeacherProvider({ children }: IProviderProps): JSX.Element {
 			})
 		}
 
+		function updateTeacherListField(payload: TUpdateTeacherListPayload): void {
+			const { value, teacherId, listName } = payload
+			const prevList = teachers[teacherId][listName] ?? []
+			const onlyNewItems = value.filter((item) => !prevList.includes(item))
+			if (!onlyNewItems.length) return
+			const newList = [...prevList, ...onlyNewItems]
+			set(ref(db, `teachers/${teacherId}/${listName}`), newList)
+		}
+
 		return {
-			data: { teachers, teachersList },
-			actions: { setNewTeacher },
+			data: { teachers },
+			actions: { setNewTeacher, updateTeacherListField },
 			selectors: {},
 		}
-	}, [teachers, teachersList])
+	}, [teachers])
 	return <Teacher.Provider value={value}>{children}</Teacher.Provider>
 }

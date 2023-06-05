@@ -61,8 +61,10 @@ export function DepartmentProvider({ children }: IProviderProps): JSX.Element {
 			departmentId,
 			listName,
 		}: TUpdateDepartmentListPayload): void {
-			const prevList = departments[departmentId][listName]
-			const newList = [...prevList, ...value]
+			const prevList = departments[departmentId][listName] ?? []
+			const onlyNewItems = value.filter((item) => !prevList.includes(item))
+			if (!onlyNewItems.length) return
+			const newList = [...prevList, ...onlyNewItems]
 			set(ref(db, `departments/${departmentId}/${listName}`), newList)
 		}
 		//selectors
