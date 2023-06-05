@@ -16,8 +16,7 @@ export type TGroups = {
 export type TGroupsList = TGroup[] | []
 
 export type TGroupsFilters = {
-	departments?: TId[]
-	lectures?: TId[]
+	departments: TId[]
 }
 
 export type TUpdateGroupListPayload = {

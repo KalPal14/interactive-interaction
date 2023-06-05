@@ -4,4 +4,10 @@
 			text-decoration: none;
 		}
 	}
+
+	&__control-panel {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
 }

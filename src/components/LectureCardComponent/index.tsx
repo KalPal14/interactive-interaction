@@ -17,10 +17,12 @@ function LectureCardComponent({ lecture }: IProps): JSX.Element {
 	const {
 		data: { groups },
 	} = useGroup()
+
 	const teacher = teachers[lecture.teacher_id]
 	const groupsNamesList = lecture.groups
 		.map((groupId) => groups[groupId].name)
 		.filter((value) => value)
+
 	if (!teacher || !lecture.groups.length) {
 		return (
 			<Header
@@ -31,10 +33,42 @@ function LectureCardComponent({ lecture }: IProps): JSX.Element {
 			</Header>
 		)
 	}
+
+	function getLectureType(): { text: string; color: string } {
+		const { start_date, end_date } = lecture
+		const now = new Date()
+		if (now >= new Date(start_date) && now <= new Date(end_date)) {
+			return {
+				text: 'Йде зараз',
+				color: '#db2828',
+			}
+		}
+		if (now > new Date(end_date)) {
+			return {
+				text: 'Архівна',
+				color: '',
+			}
+		}
+		if (now < new Date(start_date)) {
+			return {
+				text: 'Майбутня',
+				color: '#2185d0',
+			}
+		}
+		return {
+			text: '',
+			color: '',
+		}
+	}
+	const lectureType = getLectureType()
+
 	return (
 		<Link to={`lecture/${lecture.id}`}>
 			<Card className='w-100 h-100'>
-				<Card.Content header={lecture.name} />
+				<Card.Content>
+					<Card.Header>{lecture.name}</Card.Header>
+					<Card.Meta style={{ color: lectureType.color }}>{lectureType.text}</Card.Meta>
+				</Card.Content>
 				<Card.Content>
 					<Card.Description>
 						<p>

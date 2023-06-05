@@ -1,15 +1,17 @@
 import { Form, Ref } from 'semantic-ui-react'
 import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
 
-import { TSelectOptionsList } from 'ts/types/inputFields'
+import { TSelectOptionsList, TSelectOptionValue } from 'ts/types/inputFields'
 
 interface IProps {
 	label?: string
 	placeholder?: string
 	options: TSelectOptionsList
+	defaultValue?: TSelectOptionValue
 	disabled?: boolean
 	multiple?: boolean
 	clearable?: boolean
+	compact?: boolean
 }
 
 function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
@@ -23,6 +25,8 @@ function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProp
 			<Form.Dropdown
 				search
 				selection
+				defaultValue={props.defaultValue}
+				compact={props.compact}
 				clearable={props.clearable ?? false}
 				disabled={props.disabled ?? false}
 				multiple={props.multiple ?? false}
