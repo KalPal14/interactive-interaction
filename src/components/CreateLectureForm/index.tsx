@@ -22,7 +22,7 @@ function CreateLectureForm(): JSX.Element {
 		control,
 		watch,
 		trigger,
-		// setValue,
+		reset,
 		formState: { isValid },
 	} = useForm<TCreateLectureFD>({
 		mode: 'onBlur',
@@ -69,11 +69,24 @@ function CreateLectureForm(): JSX.Element {
 			const { newLectureId, newPredmetId } = createLectureWithNewPredmet(formData)
 			if (!newLectureId || !newPredmetId) return
 			updateAfterLectureCreating(formData.groups, newLectureId, newPredmetId)
+			resetFrom()
 			return
 		}
 		const newLectureId = createLectureWithExistingPredmet(formData)
 		if (!newLectureId) return
 		updateAfterLectureCreating(formData.groups, newLectureId, formData.predmet)
+		resetFrom()
+	}
+
+	function resetFrom(): void {
+		reset({
+			name: '',
+			predmet: '',
+			newPredmet: '',
+			groups: [],
+			startDate: '',
+			endDate: '',
+		})
 	}
 
 	function createLectureWithNewPredmet(formData: TCreateLectureFD): {
