@@ -30,3 +30,9 @@ export type TNewQuestionPayload = {
 	correct_answer?: TId
 	answers?: TId[]
 }
+
+export type TUpdateQuestionListPayload = {
+	value: TId[]
+	questionId: TId
+	listName: 'answers'
+}

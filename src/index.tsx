@@ -20,6 +20,7 @@ import { PredmetProvider } from 'context/Predmet'
 import { LectureProvider } from 'context/Lecture'
 import { SurveyProvider } from 'context/Survey'
 import { QuestionProvider } from 'context/Question'
+import { AnswerProvider } from 'context/Answers'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
@@ -36,7 +37,9 @@ root.render(
 										<LectureProvider>
 											<SurveyProvider>
 												<QuestionProvider>
-													<App />
+													<AnswerProvider>
+														<App />
+													</AnswerProvider>
 												</QuestionProvider>
 											</SurveyProvider>
 										</LectureProvider>

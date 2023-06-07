@@ -8,6 +8,7 @@ interface IProps {
 	placeholder?: string
 	type: TTextFieldType
 	defaultValue?: string | number
+	disabled?: boolean
 }
 
 function TextField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
@@ -19,6 +20,7 @@ function TextField<T extends FieldValues>(props: UseControllerProps<T> & IProps)
 	return (
 		<Ref innerRef={field.ref}>
 			<Form.Input
+				disabled={props.disabled}
 				type={props.type}
 				onChange={field.onChange}
 				onBlur={field.onBlur}

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { getDatabase, ref, onValue, push, set, ThenableReference } from 'firebase/database'
 
-import { TQuestions, TNewQuestionPayload } from 'ts/types/question'
+import { TQuestions, TNewQuestionPayload, TUpdateQuestionListPayload } from 'ts/types/question'
 
 interface IProviderProps {
 	children: JSX.Element
@@ -13,6 +13,7 @@ interface IContext {
 	actions: {
 		setNewQuestion: (payload: TNewQuestionPayload) => void
 		createFutureQuestionRef: () => ThenableReference
+		updateQuestionListField: (payload: TUpdateQuestionListPayload) => void
 	}
 	selectors: {}
 }
@@ -59,9 +60,18 @@ export function QuestionProvider({ children }: IProviderProps): JSX.Element {
 			})
 		}
 
+		function updateQuestionListField(payload: TUpdateQuestionListPayload): void {
+			const { value, questionId, listName } = payload
+			const prevList = questions[questionId][listName] ?? []
+			const onlyNewItems = value.filter((item) => !prevList.includes(item))
+			if (!onlyNewItems.length) return
+			const newList = [...prevList, ...onlyNewItems]
+			set(ref(db, `questions/${questionId}/${listName}`), newList)
+		}
+
 		return {
 			data: { questions },
-			actions: { setNewQuestion, createFutureQuestionRef },
+			actions: { setNewQuestion, createFutureQuestionRef, updateQuestionListField },
 			selectors: {},
 		}
 	}, [questions])

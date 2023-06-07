@@ -8,6 +8,7 @@ import CreateAccountPage from 'pages/CreateAccountPage'
 import ProtectedPage from 'containers/ProtectedPage'
 import CreateLecturePage from 'pages/CreateLecturePage'
 import LecturePage from 'pages/LecturePage'
+import SurveyPage from 'pages/SurveyPage'
 
 const rootRouter = createBrowserRouter([
 	{
@@ -59,6 +60,14 @@ const rootRouter = createBrowserRouter([
 		element: (
 			<ProtectedPage accessFor='userWithAccount'>
 				<LecturePage />
+			</ProtectedPage>
+		),
+	},
+	{
+		path: '/lecture/:lectureId/survey/:surveyId',
+		element: (
+			<ProtectedPage accessFor='userWithAccount'>
+				<SurveyPage />
 			</ProtectedPage>
 		),
 	},

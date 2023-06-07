@@ -69,16 +69,16 @@ function CreateLectureForm(): JSX.Element {
 			const { newLectureId, newPredmetId } = createLectureWithNewPredmet(formData)
 			if (!newLectureId || !newPredmetId) return
 			updateAfterLectureCreating(formData.groups, newLectureId, newPredmetId)
-			resetFrom()
+			resetForm()
 			return
 		}
 		const newLectureId = createLectureWithExistingPredmet(formData)
 		if (!newLectureId) return
 		updateAfterLectureCreating(formData.groups, newLectureId, formData.predmet)
-		resetFrom()
+		resetForm()
 	}
 
-	function resetFrom(): void {
+	function resetForm(): void {
 		reset({
 			name: '',
 			predmet: '',

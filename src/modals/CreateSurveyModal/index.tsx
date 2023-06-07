@@ -93,7 +93,7 @@ function CreateSurveyModal(): JSX.Element {
 				correct_answer: questions[index].correctAnswer ?? '',
 			})
 		})
-		resetFrom()
+		resetForm()
 		onClose()
 	}
 
@@ -104,7 +104,7 @@ function CreateSurveyModal(): JSX.Element {
 		})
 	}
 
-	function resetFrom(): void {
+	function resetForm(): void {
 		reset({
 			name: '',
 			isTest: 'true',
@@ -264,7 +264,7 @@ function CreateSurveyModal(): JSX.Element {
 							<Button
 								secondary
 								onClick={(): void => {
-									resetFrom()
+									resetForm()
 									onClose()
 								}}
 							>
