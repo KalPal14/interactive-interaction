@@ -1,98 +1,75 @@
-import { Link } from 'react-router-dom'
-import { Button, Header, Icon } from 'semantic-ui-react'
-// import { useForm } from 'react-hook-form'
-// import dateFormat from 'dateformat'
+import { Link, useParams } from 'react-router-dom'
+import { Button, Card, Header, Icon } from 'semantic-ui-react'
+import dateFormat from 'dateformat'
 
 import PageHeader from 'layouts/PageHeader'
-// import LectureCardComponent from 'components/LectureCardComponent'
-// import SelectField from 'components/shared/SelectField'
-
-import { useUser } from 'context/User'
-// import { useLecture } from 'context/Lecture'
-// import { useGroup } from 'context/Group'
-
-// import { TLecture } from 'ts/types/lecture'
-// import { TTeacher } from 'ts/types/teacher'
-// import { TStudent } from 'ts/types/student'
-// import { TId } from 'ts/types/shared'
-
-// import { lecturesTypeOptions } from 'helpers/selectOptions'
-
-import './styles.scss'
 import CreateSurveyModal from 'modals/CreateSurveyModal'
 
+import { useUser } from 'context/User'
+import { useSurvey } from 'context/Survey'
+import { useLecture } from 'context/Lecture'
+
+import './styles.scss'
+
 function LecturePage(): JSX.Element {
-	// const { control, watch } = useForm<any>({
-	// 	mode: 'onBlur',
-	// })
+	const { id: lectureId } = useParams()
 	const {
 		data: { currentUser },
 	} = useUser()
-	// const {
-	// 	data: { groups },
-	// } = useGroup()
-	// const {
-	// 	data: { lectures },
-	// } = useLecture()
+	const {
+		data: { surveys },
+	} = useSurvey()
+	const {
+		data: { lectures },
+	} = useLecture()
 
-	// const selectedLecturesType = watch('type')
+	const currentLecture = lectures[lectureId!]
 
-	// function getLecturesIdsList(): TId[] | [] {
-	// 	switch (currentUser?.role) {
-	// 		case 'teacher':
-	// 			currentUser as TTeacher
-	// 			return currentUser.lectures ?? []
-	// 		case 'student':
-	// 			currentUser as TStudent
-	// 			return groups[currentUser.group_id].lectures ?? []
-	// 		default:
-	// 			return []
-	// 	}
-	// }
+	function renderSurveysList(): JSX.Element {
+		if (!currentLecture) {
+			return renderEmptyMessage()
+		}
+		const surveysList =
+			currentLecture.surveis?.map((surveyId) => surveys[surveyId]).filter((survey) => survey) ?? []
 
-	// function filterByType({ start_date, end_date }: TLecture): boolean {
-	// 	const now = new Date()
-	// 	switch (selectedLecturesType) {
-	// 		case 'today':
-	// 			return end_date.split('T')[0] === dateFormat(now, 'yyyy-mm-dd')
-	// 		case 'active':
-	// 			return now >= new Date(start_date) && now <= new Date(end_date)
-	// 		case 'notPast':
-	// 			return now < new Date(end_date)
-	// 		case 'past':
-	// 			return now > new Date(end_date)
-	// 		case 'all':
-	// 		default:
-	// 			return true
-	// 	}
-	// }
+		if (surveysList.length) {
+			return (
+				<section className='pt-5 pb-5 lecture__surveys-list row'>
+					{surveysList.map((survey) => {
+						return (
+							<div
+								key={survey.id}
+								className='p-1 col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12'
+							>
+								<Link to={`/lecture/${lectureId}/survey/${survey.id}`}>
+									<Card className='w-100 h-100'>
+										<Card.Content>
+											<Card.Header>{survey.name}</Card.Header>
+											<Card.Meta style={{ color: '#2185d0' }}>
+												{survey.is_test ? 'Тест' : 'Опитування'}
+											</Card.Meta>
+										</Card.Content>
+										<Card.Content>
+											<Card.Description>
+												<p>Кількість питань: {survey.questions.length}</p>
+												<p>Час створення: {dateFormat(new Date(survey.created_at), 'HH:MM')}</p>
+												<p>
+													Дата створення: {dateFormat(new Date(survey.created_at), 'dd-mm-yyyy')}
+												</p>
+											</Card.Description>
+										</Card.Content>
+									</Card>
+								</Link>
+							</div>
+						)
+					})}
+				</section>
+			)
+		}
+		return renderEmptyMessage()
+	}
 
-	function renderTopicsList(): JSX.Element {
-		// const lecturesIdsList = getLecturesIdsList()
-		// const lecturesList = lecturesIdsList
-		// 	.map((lectureId) => lectures[lectureId])
-		// 	.filter((lecture) => lecture)
-		// 	.filter((lecture) => filterByType(lecture))
-		// const sortedLecturesList = [...lecturesList].sort(
-		// 	(a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
-		// )
-
-		// if (sortedLecturesList.length) {
-		// 	return (
-		// 		<section className='pt-5 pb-5 home__lectures-list row'>
-		// 			{sortedLecturesList.map((lecture) => {
-		// 				return (
-		// 					<div
-		// 						key={lecture.id}
-		// 						className='p-1 col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12'
-		// 					>
-		// 						<LectureCardComponent lecture={lecture} />
-		// 					</div>
-		// 				)
-		// 			})}
-		// 		</section>
-		// 	)
-		// }
+	function renderEmptyMessage(): JSX.Element {
 		return (
 			<Header
 				textAlign='center'
@@ -123,7 +100,7 @@ function LecturePage(): JSX.Element {
 						</div>
 					)}
 				</section>
-				{renderTopicsList()}
+				{renderSurveysList()}
 			</main>
 		</div>
 	)
