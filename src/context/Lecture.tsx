@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { getDatabase, ref, onValue, push, set, ThenableReference } from 'firebase/database'
 
-import { TLectures, TNewLecturePayload } from 'ts/types/lecture'
+import { TLectures, TNewLecturePayload, TUpdateLectureListPayload } from 'ts/types/lecture'
 
 interface IProviderProps {
 	children: JSX.Element
@@ -13,6 +13,7 @@ interface IContext {
 	actions: {
 		setNewLecture: (payload: TNewLecturePayload) => void
 		createFutureLectureRef: () => ThenableReference
+		updateLectureListField: (payload: TUpdateLectureListPayload) => void
 	}
 	selectors: {}
 }
@@ -59,9 +60,18 @@ export function LectureProvider({ children }: IProviderProps): JSX.Element {
 			})
 		}
 
+		function updateLectureListField(payload: TUpdateLectureListPayload): void {
+			const { value, lectureId, listName } = payload
+			const prevList = lectures[lectureId][listName] ?? []
+			const onlyNewItems = value.filter((item) => !prevList.includes(item))
+			if (!onlyNewItems.length) return
+			const newList = [...prevList, ...onlyNewItems]
+			set(ref(db, `lectures/${lectureId}/${listName}`), newList)
+		}
+
 		return {
 			data: { lectures },
-			actions: { setNewLecture, createFutureLectureRef },
+			actions: { setNewLecture, createFutureLectureRef, updateLectureListField },
 			selectors: {},
 		}
 	}, [lectures])

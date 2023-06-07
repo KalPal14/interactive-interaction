@@ -1,5 +1,5 @@
-.home {
-	&__lectures-list {
+.lecture {
+	&__topics-list {
 		a {
 			text-decoration: none;
 		}
@@ -7,16 +7,19 @@
 
 	&__control-panel {
 		display: flex;
-		align-items: flex-end;
 		justify-content: space-between;
 
-		@media (max-width: 425px) {
+		@media (max-width: 576px) {
 			flex-direction: column;
-			align-items: normal;
+
+			&-right {
+				margin-top: 20px;
+				display: flex;
+				margin-right: -3.5px;
+			}
 
 			.ui.primary.button {
 				width: 100%;
-				margin-top: 20px;
 			}
 		}
 	}

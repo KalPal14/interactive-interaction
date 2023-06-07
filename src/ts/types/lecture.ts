@@ -9,7 +9,6 @@ export type TLecture = {
 	end_date: string
 	name: string
 	groups: TId[]
-	open_questions?: TId[]
 	surveis?: TId[]
 }
 
@@ -27,6 +26,11 @@ export type TNewLecturePayload = {
 	end_date: string
 	name: string
 	groups: TId[]
-	open_questions?: TId[]
 	surveis?: TId[]
+}
+
+export type TUpdateLectureListPayload = {
+	value: TId[]
+	lectureId: TId
+	listName: 'groups' | 'surveis'
 }

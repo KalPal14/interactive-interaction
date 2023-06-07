@@ -40,3 +40,39 @@ export const lecturesTypeOptions: TSelectOptionsList = [
 		text: 'Архів минулих',
 	},
 ]
+
+export const questionFieldTypeOptions: TSelectOptionsList = [
+	{
+		key: 'text',
+		value: 'text',
+		text: 'Коротка текстова відповідь',
+	},
+	{
+		key: 'textarea',
+		value: 'textarea',
+		text: 'Розгорнута текстова відповідь',
+	},
+	{
+		key: 'select',
+		value: 'select',
+		text: 'Вибрати один варіант зі списку',
+	},
+	{
+		key: 'multiselect',
+		value: 'multiselect',
+		text: 'Вибрати декілька варіанів зі списку',
+	},
+]
+
+export const trueFalseOptions: TSelectOptionsList = [
+	{
+		key: 'true',
+		value: 'true',
+		text: 'Так',
+	},
+	{
+		key: 'false',
+		value: 'false',
+		text: 'Ні',
+	},
+]

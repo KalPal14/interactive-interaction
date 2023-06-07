@@ -7,6 +7,7 @@ interface IProps {
 	label?: string
 	placeholder?: string
 	type: TTextFieldType
+	defaultValue?: string | number
 }
 
 function TextField<T extends FieldValues>(props: UseControllerProps<T> & IProps): JSX.Element {
