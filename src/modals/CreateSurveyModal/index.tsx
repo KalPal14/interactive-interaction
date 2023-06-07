@@ -20,6 +20,7 @@ function CreateSurveyModal(): JSX.Element {
 		handleSubmit,
 		control,
 		watch,
+		reset,
 		formState: { isValid },
 	} = useForm<any>({
 		mode: 'onBlur',
@@ -92,12 +93,24 @@ function CreateSurveyModal(): JSX.Element {
 				correct_answer: questions[index].correctAnswer ?? '',
 			})
 		})
+		resetFrom()
+		onClose()
 	}
 
 	function createQuestionsRefs(questions: any[]): ThenableReference[] {
 		return questions.map(() => {
 			const newQuestionRef = createFutureQuestionRef()
 			return newQuestionRef
+		})
+	}
+
+	function resetFrom(): void {
+		reset({
+			name: '',
+			isTest: 'true',
+			options: [],
+			questions: [],
+			questionsAmount: 1,
 		})
 	}
 
@@ -250,7 +263,10 @@ function CreateSurveyModal(): JSX.Element {
 						<Modal.Actions className='d-flex justify-content-end pt-5 mt-5'>
 							<Button
 								secondary
-								onClick={onClose}
+								onClick={(): void => {
+									resetFrom()
+									onClose()
+								}}
 							>
 								Відмінити
 							</Button>
