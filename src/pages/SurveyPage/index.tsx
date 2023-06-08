@@ -1,10 +1,11 @@
 import { Link, useParams } from 'react-router-dom'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Header, Icon } from 'semantic-ui-react'
 
 import PageHeader from 'layouts/PageHeader'
 import SurveyForm from 'components/SurveyForm'
+import Amswers from 'components/Amswers'
 
-// import { useUser } from 'context/User'
+import { useUser } from 'context/User'
 // import { useSurvey } from 'context/Survey'
 // import { useLecture } from 'context/Lecture'
 
@@ -12,9 +13,9 @@ import './styles.scss'
 
 function SurveyPage(): JSX.Element {
 	const { lectureId } = useParams()
-	// const {
-	// 	data: { currentUser },
-	// } = useUser()
+	const {
+		data: { currentUser },
+	} = useUser()
 	// const {
 	// 	data: { surveys },
 	// } = useSurvey()
@@ -23,7 +24,7 @@ function SurveyPage(): JSX.Element {
 	// } = useLecture()
 
 	return (
-		<div className='survey'>
+		<div className='survey pb-5'>
 			<PageHeader />
 			<main className='container pt-5'>
 				<section>
@@ -38,7 +39,13 @@ function SurveyPage(): JSX.Element {
 					</Link>
 				</section>
 				<section className='pt-5'>
+					{currentUser?.role === 'teacher' && (
+						<Header>Демонстрація того, як студенти бачать створену форму</Header>
+					)}
 					<SurveyForm />
+				</section>
+				<section className='pt-5'>
+					<Amswers />
 				</section>
 			</main>
 		</div>

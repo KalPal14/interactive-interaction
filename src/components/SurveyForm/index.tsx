@@ -116,7 +116,7 @@ function SurveyForm(): JSX.Element {
 						label={question.label ?? ''}
 						placeholder='Введіть відповідь'
 						rules={{
-							required: `Це поле є обов'язковим`,
+							required: currentUser?.role === 'teacher' ? false : `Це поле є обов'язковим`,
 						}}
 						disabled={isDisabled}
 					/>
@@ -130,7 +130,7 @@ function SurveyForm(): JSX.Element {
 						label={question.label ?? ''}
 						placeholder='Виберіть один варіант'
 						rules={{
-							required: `Це поле є обов'язковим`,
+							required: currentUser?.role === 'teacher' ? false : `Це поле є обов'язковим`,
 						}}
 						disabled={isDisabled}
 					/>
@@ -145,7 +145,7 @@ function SurveyForm(): JSX.Element {
 						label={question.label ?? ''}
 						placeholder='виберіть один чи декілька варіантів'
 						rules={{
-							required: `Це поле є обов'язковим`,
+							required: currentUser?.role === 'teacher' ? false : `Це поле є обов'язковим`,
 						}}
 						disabled={isDisabled}
 					/>

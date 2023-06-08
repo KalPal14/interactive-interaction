@@ -44,7 +44,7 @@ function HomePage(): JSX.Element {
 				return currentUser.lectures ?? []
 			case 'student':
 				currentUser as TStudent
-				return groups[currentUser.group_id].lectures ?? []
+				return groups[currentUser.group_id]?.lectures ?? []
 			default:
 				return []
 		}
