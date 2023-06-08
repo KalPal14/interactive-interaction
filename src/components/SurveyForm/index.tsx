@@ -105,7 +105,7 @@ function SurveyForm(): JSX.Element {
 		const thisUserAnswer = answersList.find(
 			({ question_id, user_id }) => questionId === question_id && currentUser?.id === user_id,
 		)
-		const isDisabled = currentSurvey.is_test && Boolean(thisUserAnswer)
+		const isDisabled = currentSurvey && currentSurvey.is_test && Boolean(thisUserAnswer)
 		switch (question.field_type) {
 			case 'text':
 				return (
@@ -155,17 +155,27 @@ function SurveyForm(): JSX.Element {
 		}
 	}
 
+	function isNeedShowSubmitBtn(): boolean {
+		if (!currentSurvey) {
+			return false
+		}
+		if (currentSurvey.is_test && formSubmissionCounter.current >= 1) {
+			return false
+		}
+		if (currentUser?.role === 'teacher') {
+			return false
+		}
+		return true
+	}
+
 	return (
 		<Form onSubmit={handleSubmit(onSubmit)}>
 			{questionsList.map((question, index) => renderField(question, index))}
-			{(currentSurvey.is_test && formSubmissionCounter.current >= 1) ||
-			currentUser?.role === 'teacher' ? (
-				<></>
-			) : (
+			{isNeedShowSubmitBtn() && (
 				<Button
 					primary
 					type='submit'
-					disabled={!isValid || (currentSurvey.is_test && formSubmissionCounter.current >= 1)}
+					disabled={!isValid}
 				>
 					Відповісти
 				</Button>
