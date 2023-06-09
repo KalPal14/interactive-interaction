@@ -80,7 +80,7 @@ function TeacherAnswers(): JSX.Element {
 			{currentStudents.map((student) => {
 				if (!student.answers.length) return <></>
 				return (
-					<Message className='pb-0'>
+					<Message className='pb-1'>
 						<Header
 							as='h3'
 							className='pb-3'

@@ -56,7 +56,7 @@ function StudentAnswers(): JSX.Element {
 	}
 
 	return (
-		<Message className='pb-0'>
+		<Message className='pb-1'>
 			<Header
 				as='h3'
 				className='pb-3'

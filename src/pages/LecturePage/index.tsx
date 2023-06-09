@@ -3,6 +3,7 @@ import { Button, Card, Header, Icon } from 'semantic-ui-react'
 import dateFormat from 'dateformat'
 
 import PageHeader from 'layouts/PageHeader'
+import LectureReportModal from 'modals/LectureReportModal'
 import CreateSurveyModal from 'modals/CreateSurveyModal'
 
 import { useUser } from 'context/User'
@@ -96,6 +97,7 @@ function LecturePage(): JSX.Element {
 					</Link>
 					{currentUser?.role === 'teacher' && (
 						<div className='lecture__control-panel-right'>
+							<LectureReportModal />
 							<CreateSurveyModal />
 						</div>
 					)}

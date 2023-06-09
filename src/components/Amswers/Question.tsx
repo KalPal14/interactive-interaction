@@ -17,7 +17,7 @@ function Question({ question, survey, answersList }: IProps): JSX.Element {
 		<>
 			<Header as='h5'>{question.label ?? survey.name}</Header>
 			<List
-				className='pb-3 mt-1'
+				className='pb-2 mb-1 mt-1'
 				style={{ paddingLeft: '1rem' }}
 			>
 				{answersList.map(({ id, answer }, index) => (
