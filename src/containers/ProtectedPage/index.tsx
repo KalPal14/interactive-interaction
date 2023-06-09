@@ -19,7 +19,7 @@ function ProtectedPage({ children, accessFor }: IProps): JSX.Element {
 
 	const callsCount = useRef(1)
 	useEffect(() => {
-		if (callsCount.current >= 3) {
+		if (callsCount.current >= 2) {
 			checkAccessRights()
 		}
 		callsCount.current++
