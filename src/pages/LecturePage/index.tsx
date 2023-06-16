@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Button, Card, Header, Icon } from 'semantic-ui-react'
 import dateFormat from 'dateformat'
 
-import PageHeader from 'layouts/PageHeader'
+import PageHeader from 'components/PageHeader'
 import LectureReportModal from 'modals/LectureReportModal'
 import CreateSurveyModal from 'modals/CreateSurveyModal'
 

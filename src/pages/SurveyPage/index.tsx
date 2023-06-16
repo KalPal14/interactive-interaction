@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { Button, Header, Icon } from 'semantic-ui-react'
 
-import PageHeader from 'layouts/PageHeader'
+import PageHeader from 'components/PageHeader'
 import SurveyForm from 'components/SurveyForm'
 import Amswers from 'components/Amswers'
 

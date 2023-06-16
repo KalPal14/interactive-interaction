@@ -3,7 +3,7 @@ import { Button, Header, Form } from 'semantic-ui-react'
 import { useForm } from 'react-hook-form'
 import dateFormat from 'dateformat'
 
-import PageHeader from 'layouts/PageHeader'
+import PageHeader from 'components/PageHeader'
 import LectureCardComponent from 'components/LectureCardComponent'
 import SelectField from 'components/shared/SelectField'
 
