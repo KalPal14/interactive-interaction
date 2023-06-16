@@ -22,3 +22,7 @@ export type TCreateLectureFD = {
 	endDate: string
 	groups: TId[]
 }
+
+export type TLecturesListFiltersFD = {
+	type: string
+}

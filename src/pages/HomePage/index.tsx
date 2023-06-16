@@ -11,17 +11,18 @@ import { useUser } from 'context/User'
 import { useLecture } from 'context/Lecture'
 import { useGroup } from 'context/Group'
 
+import { TId } from 'ts/types/shared'
 import { TLecture } from 'ts/types/lecture'
 import { TTeacher } from 'ts/types/teacher'
 import { TStudent } from 'ts/types/student'
-import { TId } from 'ts/types/shared'
+import { TLecturesListFiltersFD } from 'ts/types/formData'
 
 import { lecturesTypeOptions } from 'helpers/selectOptions'
 
 import './styles.scss'
 
 function HomePage(): JSX.Element {
-	const { control, watch } = useForm<any>({
+	const { control, watch } = useForm<TLecturesListFiltersFD>({
 		mode: 'onBlur',
 	})
 
@@ -113,7 +114,7 @@ function HomePage(): JSX.Element {
 							name='type'
 							control={control}
 							options={lecturesTypeOptions}
-							defaultValue={lecturesTypeOptions[0].key}
+							defaultValue={lecturesTypeOptions[0].key as string}
 							label='Тип'
 							rules={{
 								required: false,
