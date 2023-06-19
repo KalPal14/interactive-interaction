@@ -83,12 +83,10 @@ function HomePage(): JSX.Element {
 				<section className='pt-5 pb-5 home__lectures-list row'>
 					{sortedLecturesList.map((lecture) => {
 						return (
-							<div
+							<LectureCardComponent
 								key={lecture.id}
-								className='p-1 col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12'
-							>
-								<LectureCardComponent lecture={lecture} />
-							</div>
+								lecture={lecture}
+							/>
 						)
 					})}
 				</section>

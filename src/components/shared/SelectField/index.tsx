@@ -25,7 +25,6 @@ function SelectField<T extends FieldValues>(props: UseControllerProps<T> & IProp
 			<Form.Dropdown
 				search
 				selection
-				defaultValue={props.defaultValue}
 				compact={props.compact}
 				clearable={props.clearable ?? false}
 				disabled={props.disabled ?? false}
