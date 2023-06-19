@@ -6,6 +6,7 @@ import { Form, Button } from 'semantic-ui-react'
 import TextField from 'components/shared/TextField'
 import SelectField from 'components/shared/SelectField'
 
+import { useLecture } from 'context/Lecture'
 import { useSurvey } from 'context/Survey'
 import { useQuestion } from 'context/Question'
 import { useUser } from 'context/User'
@@ -33,6 +34,9 @@ function SurveyForm(): JSX.Element {
 	})
 
 	const {
+		data: { lectures },
+	} = useLecture()
+	const {
 		data: { currentUser },
 	} = useUser()
 	const {
@@ -48,6 +52,8 @@ function SurveyForm(): JSX.Element {
 	} = useAnswer()
 
 	const currentSurvey = surveys[surveyId!]
+	if (!currentSurvey) return <></>
+	const currentLecture = lectures[currentSurvey.lecture_id]
 	const answersList: TAnswersList = Object.values(answers)
 	const questionsList = getQuestionsList()
 
@@ -163,6 +169,9 @@ function SurveyForm(): JSX.Element {
 			return false
 		}
 		if (currentUser?.role === 'teacher') {
+			return false
+		}
+		if (new Date(currentLecture.end_date) < new Date()) {
 			return false
 		}
 		return true

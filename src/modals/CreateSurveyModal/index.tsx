@@ -46,11 +46,13 @@ function CreateSurveyModal(): JSX.Element {
 		actions: { createFutureQuestionRef, setNewQuestion },
 	} = useQuestion()
 	const {
+		data: { lectures },
 		actions: { updateLectureListField },
 	} = useLecture()
 
 	const selectedQuestionsAmount = watch('questionsAmount')
 	const selectedIsTest = watch('isTest')
+	const currentLecture = lectures[lectureId!] ?? null
 
 	function onSubmit(formData: any): void {
 		const questions = formData.questions.slice(0, formData.questionsAmount)
@@ -207,6 +209,7 @@ function CreateSurveyModal(): JSX.Element {
 					<Button
 						compact
 						primary
+						disabled={new Date(currentLecture.end_date) < new Date()}
 					>
 						Додати опитування
 					</Button>
