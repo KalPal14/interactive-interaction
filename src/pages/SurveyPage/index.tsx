@@ -6,8 +6,6 @@ import SurveyForm from 'components/SurveyForm'
 import Amswers from 'components/Amswers'
 
 import { useUser } from 'context/User'
-// import { useSurvey } from 'context/Survey'
-// import { useLecture } from 'context/Lecture'
 
 import './styles.scss'
 
@@ -16,12 +14,6 @@ function SurveyPage(): JSX.Element {
 	const {
 		data: { currentUser },
 	} = useUser()
-	// const {
-	// 	data: { surveys },
-	// } = useSurvey()
-	// const {
-	// 	data: { lectures },
-	// } = useLecture()
 
 	return (
 		<div className='survey pb-5'>
