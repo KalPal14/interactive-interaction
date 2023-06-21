@@ -160,7 +160,7 @@ function CreateSurveyModal(): JSX.Element {
 					options={questionFieldTypeOptions}
 					placeholder='Виберіть тип поля'
 					rules={{
-						required: 'You must select an option',
+						required: `Ви повинні вибрати варіант`,
 					}}
 				/>
 				{isShowQuestionOptionsFields(`questions.${questionIndex}.fieldType`) && (

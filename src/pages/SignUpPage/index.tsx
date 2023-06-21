@@ -4,11 +4,11 @@ import SignUpForm from 'components/SignUpForm'
 function SignUpPage(): JSX.Element {
 	return (
 		<AuthFormContainer
-			title='Sign Up'
-			subtitle='Already have an account?'
+			title='Зареєструватися'
+			subtitle='Вже є аккаунт?'
 			link={{
 				to: '/sign-in',
-				text: 'Sign In',
+				text: 'Увійти',
 			}}
 		>
 			<SignUpForm />

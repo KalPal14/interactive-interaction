@@ -53,8 +53,8 @@ function SignInForm(): JSX.Element {
 					break
 				default:
 					onTemporaryOpen(3000, {
-						header: 'Something went wrong',
-						content: 'Please try again',
+						header: 'Щось пішло не так',
+						content: 'Будь ласка спробуйте ще раз',
 					})
 					break
 			}
@@ -67,10 +67,10 @@ function SignInForm(): JSX.Element {
 				type='email'
 				name='email'
 				control={control}
-				label='Email'
-				placeholder='Enter your email'
+				label='Електронна пошта'
+				placeholder='Введіть свою електронну адресу'
 				rules={{
-					required: 'Email field is required',
+					required: 'Введіть адресу електронної пошти',
 					pattern: {
 						value: emailValidationPattern,
 						message: 'Будь ласка, введіть пошту ХНУРЕ',
@@ -81,10 +81,10 @@ function SignInForm(): JSX.Element {
 				type='password'
 				name='password'
 				control={control}
-				label='Password'
-				placeholder='Create password'
+				label='Пароль'
+				placeholder='Створити пароль'
 				rules={{
-					required: 'Password field is required',
+					required: `Поле пароля є обов'язковим`,
 				}}
 			/>
 			<Alert
@@ -99,7 +99,7 @@ function SignInForm(): JSX.Element {
 				disabled={!isValid || pending}
 				loading={pending}
 			>
-				Sign In
+				Увійти
 			</Button>
 		</Form>
 	)

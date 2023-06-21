@@ -218,7 +218,7 @@ function CreateLectureForm(): JSX.Element {
 				label='Группа'
 				placeholder='Виберіть группу'
 				rules={{
-					required: 'You must select an option',
+					required: `Ви повинні вибрати варіант`,
 				}}
 			/>
 			<DateField

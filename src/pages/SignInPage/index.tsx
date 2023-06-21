@@ -4,11 +4,11 @@ import SignInForm from 'components/SignInForm'
 function SignInPage(): JSX.Element {
 	return (
 		<AuthFormContainer
-			title='Sign In'
-			subtitle={`Don't have an account?`}
+			title='Увійти'
+			subtitle={`Немає облікового запису?`}
 			link={{
 				to: '/sign-up',
-				text: 'Sign Up',
+				text: 'Зареєструватися',
 			}}
 		>
 			<SignInForm />

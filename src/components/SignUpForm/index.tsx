@@ -40,15 +40,15 @@ function SignUpForm(): JSX.Element {
 			switch (err.message) {
 				case 'Firebase: Error (auth/email-already-in-use).':
 					onTemporaryOpen(4000, {
-						header: 'This account already exists',
+						header: 'Такий обліковий запис уже існує',
 						content:
-							'You can log in using this mail or register using another one that is not in the system',
+							'Ви можете увійти за цією поштою або зареєструватися за іншою, якої немає в системі',
 					})
 					break
 				default:
 					onTemporaryOpen(3000, {
-						header: 'Something went wrong',
-						content: 'Please try again',
+						header: 'Щось пішло не так',
+						content: 'Будь ласка спробуйте ще раз',
 					})
 					break
 			}
@@ -61,10 +61,10 @@ function SignUpForm(): JSX.Element {
 				type='email'
 				name='email'
 				control={control}
-				label='Email'
-				placeholder='Enter your email'
+				label='Електронна пошта'
+				placeholder='Введіть адресу електронної пошти'
 				rules={{
-					required: 'Email field is required',
+					required: `Поле електронної пошти обов'язкове`,
 					pattern: {
 						value: emailValidationPattern,
 						message: 'Будь ласка, введіть пошту ХНУРЕ',
@@ -75,14 +75,14 @@ function SignUpForm(): JSX.Element {
 				type='password'
 				name='password'
 				control={control}
-				label='Password'
-				placeholder='Create password'
+				label='Пароль'
+				placeholder='Створити пароль'
 				rules={{
-					required: 'Password field is required',
+					required: `Поле пароля є обов'язковим`,
 					pattern: {
 						value: passwordValidationPattern,
 						message:
-							'Password must contain at least 6 characters, at least one letter and one number',
+							'Пароль повинен містити не менше 6 символів, принаймні одну літеру та одну цифру',
 					},
 				}}
 			/>
@@ -98,7 +98,7 @@ function SignUpForm(): JSX.Element {
 				disabled={!isValid || pending}
 				loading={pending}
 			>
-				Sign Up
+				Зареєструватися
 			</Button>
 		</Form>
 	)

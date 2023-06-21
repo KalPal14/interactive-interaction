@@ -114,30 +114,30 @@ function CreateAccountForm(): JSX.Element {
 				type='text'
 				name='firstName'
 				control={control}
-				label='First Name'
-				placeholder='Enter your First Name'
+				label={`Ім'я`}
+				placeholder={`Введіть своє ім'я`}
 				rules={{
-					required: 'This field is required',
+					required: `Це поле є обов'язковим`,
 				}}
 			/>
 			<TextField
 				type='text'
 				name='lastName'
 				control={control}
-				label='Last Name'
-				placeholder='Enter your Last Name'
+				label='Прізвище'
+				placeholder='Введіть своє прізвище'
 				rules={{
-					required: 'This field is required',
+					required: `Це поле є обов'язковим`,
 				}}
 			/>
 			<SelectField
 				name='faculty'
 				control={control}
 				options={facultiesOptions}
-				label='Faculty'
-				placeholder='Select your faculty'
+				label='Факультет'
+				placeholder='Виберіть свій факультет'
 				rules={{
-					required: 'You must select an option',
+					required: `Ви повинні вибрати варіант`,
 				}}
 			/>
 			<SelectField
@@ -145,20 +145,20 @@ function CreateAccountForm(): JSX.Element {
 				control={control}
 				options={selectDepartmentsOptionsBy({ faculies: [selectedFaculty] })}
 				disabled={!selectedFaculty}
-				label='Department'
-				placeholder='Select your department'
+				label='Відділ'
+				placeholder='Виберіть свій відділ'
 				rules={{
-					required: 'You must select an option',
+					required: `Ви повинні вибрати варіант`,
 				}}
 			/>
 			<SelectField
 				name='role'
 				control={control}
 				options={userRole}
-				label='Who you are?'
-				placeholder='Select'
+				label='Хто ви?'
+				placeholder='Виберіть'
 				rules={{
-					required: 'You must select an option',
+					required: `Ви повинні вибрати варіант`,
 				}}
 			/>
 			{selectedRole === 'student' && (
@@ -167,10 +167,10 @@ function CreateAccountForm(): JSX.Element {
 					control={control}
 					options={selectGroupsOptionsBy({ departments: [selectedDepartmet] })}
 					disabled={!watch('faculty')}
-					label='Group'
-					placeholder='Select your group'
+					label='Група'
+					placeholder='Виберіть свою групу'
 					rules={{
-						required: 'You must select an option',
+						required: `Ви повинні вибрати варіант`,
 					}}
 				/>
 			)}
@@ -179,7 +179,7 @@ function CreateAccountForm(): JSX.Element {
 				type='submit'
 				disabled={!isValid}
 			>
-				Create
+				Створити
 			</Button>
 		</Form>
 	)
