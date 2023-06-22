@@ -45,23 +45,23 @@ export const questionFieldTypeOptions: TSelectOptionsList = [
 	{
 		key: 'text',
 		value: 'text',
-		text: 'Коротка текстова відповідь',
+		text: 'Текстова відповідь',
 	},
-	{
-		key: 'textarea',
-		value: 'textarea',
-		text: 'Розгорнута текстова відповідь',
-	},
+	// {
+	// 	key: 'textarea',
+	// 	value: 'textarea',
+	// 	text: 'Розгорнута текстова відповідь',
+	// },
 	{
 		key: 'select',
 		value: 'select',
-		text: 'Вибрати один варіант зі списку',
+		text: 'Вибрати варіант зі списку',
 	},
-	{
-		key: 'multiselect',
-		value: 'multiselect',
-		text: 'Вибрати декілька варіанів зі списку',
-	},
+	// {
+	// 	key: 'multiselect',
+	// 	value: 'multiselect',
+	// 	text: 'Вибрати декілька варіанів зі списку',
+	// },
 ]
 
 export const trueFalseOptions: TSelectOptionsList = [

@@ -120,7 +120,7 @@ function CreateSurveyModal(): JSX.Element {
 		const selectedFieldType: string = watch(fieldTypeName)
 		switch (selectedFieldType) {
 			case 'select':
-			case 'multiselect':
+				// case 'multiselect':
 				return true
 			default:
 				return false
