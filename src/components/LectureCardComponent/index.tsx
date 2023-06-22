@@ -7,6 +7,8 @@ import { usePredmet } from 'context/Predmet'
 
 import { TLecture } from 'ts/types/lecture'
 
+import { getLectureType } from 'helpers/functions'
+
 interface IProps {
 	lecture: TLecture
 }
@@ -32,33 +34,7 @@ function LectureCardComponent({ lecture }: IProps): JSX.Element {
 		return <></>
 	}
 
-	function getLectureType(): { text: string; color: string } {
-		const { start_date, end_date } = lecture
-		const now = new Date()
-		if (now >= new Date(start_date) && now <= new Date(end_date)) {
-			return {
-				text: 'Йде зараз',
-				color: '#db2828',
-			}
-		}
-		if (now > new Date(end_date)) {
-			return {
-				text: 'Архівна',
-				color: '',
-			}
-		}
-		if (now < new Date(start_date)) {
-			return {
-				text: 'Майбутня',
-				color: '#2185d0',
-			}
-		}
-		return {
-			text: '',
-			color: '',
-		}
-	}
-	const lectureType = getLectureType()
+	const lectureType = getLectureType(lecture)
 
 	return (
 		<div
