@@ -4,12 +4,12 @@ export const userRole: TSelectOptionsList = [
 	{
 		key: 'student',
 		value: 'student',
-		text: 'Student',
+		text: 'Студент',
 	},
 	{
 		key: 'teacher',
 		value: 'teacher',
-		text: 'Teacher',
+		text: 'Викладач',
 	},
 ]
 

@@ -145,8 +145,8 @@ function CreateAccountForm(): JSX.Element {
 				control={control}
 				options={selectDepartmentsOptionsBy({ faculies: [selectedFaculty] })}
 				disabled={!selectedFaculty}
-				label='Відділ'
-				placeholder='Виберіть свій відділ'
+				label='Кафедра'
+				placeholder='Виберіть свою кафедру'
 				rules={{
 					required: `Ви повинні вибрати варіант`,
 				}}
